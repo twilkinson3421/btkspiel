@@ -1,0 +1,113 @@
+:root {
+  --i: clamp(1.875px, 0.1875dvw, 0.1875dvw);
+
+  @media screen and (min-width: 900px) {
+    --i: clamp(1px, 0.1dvw, 0.1dvw);
+  }
+
+  --ii: calc(2 * var(--i));
+  --iii: calc(3 * var(--i));
+  --iv: calc(4 * var(--i));
+  --v: calc(5 * var(--i));
+  --vi: calc(6 * var(--i));
+  --vii: calc(7 * var(--i));
+  --viii: calc(8 * var(--i));
+  --ix: calc(9 * var(--i));
+  --x: calc(10 * var(--i));
+  --xiv: calc(14 * var(--i));
+  --xv: calc(15 * var(--i));
+  --xx: calc(20 * var(--i));
+  --xxv: calc(25 * var(--i));
+  --xxx: calc(30 * var(--i));
+  --xxxv: calc(35 * var(--i));
+  --xl: calc(40 * var(--i));
+  --l: calc(50 * var(--i));
+  --lxxv: calc(75 * var(--i));
+  --c: calc(100 * var(--i));
+
+  --background: #1a1a1f;
+  --large_selection: #22222a;
+  --background_light_translucent: #a0a0a0d0;
+  --foreground: #ffffff;
+  --foreground_dimmed: #ccc;
+  --accent: #3a26be;
+  --secondary: #ff3333;
+  --success: #2edc71;
+  --error: #e74c3c;
+  --divider: #888888;
+  --link: #8888ff;
+
+  --border: solid var(--i) var(--foreground);
+  --border_no_color: solid var(--i);
+  --border_radius: var(--v);
+
+  --shadow: 0 0 var(--v) var(--accent);
+  --shadow_no_color: 0 0 var(--v);
+
+  --border: solid var(--i) var(--foreground);
+  --border_no_color: solid var(--i);
+  --border_radius: var(--ii);
+  --shadow: 0 0 var(--iv) var(--accent);
+  --shadow_no_color: 0 0 var(--iv);
+
+  --transition_duration: 0.2s;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: var(--viii);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+    'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  transition-duration: var(--transition_duration);
+
+  &::selection {
+    background-color: var(--link);
+    color: var(--foreground);
+  }
+
+  &:not(script, style, head) {
+    display: flex;
+  }
+
+  &:is(body) {
+    min-height: 100dvh;
+    width: 100dvw;
+  }
+
+  &:is(body, main) {
+    flex-direction: column;
+  }
+
+  &:is(a) {
+    color: var(--foreground);
+    text-decoration: none;
+  }
+
+  &:is(button) {
+    cursor: pointer;
+  }
+
+  &:is(input, textarea) {
+    outline: none;
+  }
+
+  &:is(article, p) {
+    line-height: 1.6;
+
+    @media screen and (min-width: 900px) {
+      line-height: 1.9;
+    }
+  }
+}
