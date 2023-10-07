@@ -7,7 +7,7 @@ export default async function ZugangLayout({ children }: { children: React.React
   const session = await getServerSession(config);
 
   if (session) {
-    redirect('/features/account');
+    redirect('/features/my-account');
   }
 
   return <Fragment>{children}</Fragment>;
