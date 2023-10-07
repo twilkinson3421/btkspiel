@@ -2,6 +2,7 @@
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 
 export default function Login() {
   const [name, setName] = useState('');
@@ -11,6 +12,23 @@ export default function Login() {
 
   async function login(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (!name || !password) {
+      setError({ error: true, message: 'Please fill in all fields' });
+      return;
+    }
+
+    const login$res = await signIn('credentials', { name, password, redirect: false });
+
+    if (login$res?.error) {
+      setError({ error: true, message: 'Incorrect username or password' });
+      return;
+    }
+
+    if (login$res?.ok) {
+      setError({ error: false, message: '' });
+      router.replace('/features/my-account');
+    }
   }
 
   return (
