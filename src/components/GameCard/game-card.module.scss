@@ -1,0 +1,53 @@
+.container {
+  flex-direction: column;
+  gap: var(--ii);
+  background-color: #0f0f0f;
+  flex: 1;
+  padding: var(--x);
+  border: var(--border_no_color) #484848;
+  border-radius: var(--border_radius);
+  box-shadow: var(--shadow_no_color) black;
+  justify-content: space-between;
+  gap: var(--x);
+  overflow: hidden;
+  position: relative;
+
+  * {
+    z-index: 2;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    object-fit: cover;
+    filter: brightness(0.25) blur(1px) contrast(0.9);
+  }
+
+  &:hover {
+    & .container__image {
+      filter: brightness(0.5);
+    }
+  }
+
+  &__header {
+    &__title {
+      font-size: 1.75rem;
+    }
+  }
+
+  &__main {
+    width: 80%;
+
+    &__pegi {
+      position: absolute;
+      width: 12%;
+      bottom: var(--v);
+      right: var(--v);
+      box-shadow: 0 0 var(--ii) var(--i) black;
+    }
+  }
+}

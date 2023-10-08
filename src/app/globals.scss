@@ -34,17 +34,13 @@
   --secondary: #ff3333;
   --success: #2edc71;
   --error: #e74c3c;
-  --divider: #888888;
+  --divider: #666;
   --link: #8888ff;
-
-  --border: solid var(--i) var(--foreground);
-  --border_no_color: solid var(--i);
-  --border_radius: var(--v);
 
   --shadow: 0 0 var(--v) var(--accent);
   --shadow_no_color: 0 0 var(--v);
 
-  --border: solid var(--i) var(--foreground);
+  --border: solid var(--i) var(--divider);
   --border_no_color: solid var(--i);
   --border_radius: var(--ii);
   --shadow: 0 0 var(--iv) var(--accent);
