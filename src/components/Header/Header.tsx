@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <hgroup className={styles.header__group}>
-        <Link href='/games'>
+        <Link tabIndex={0} href='/games'>
           <PiGameControllerBold />
           BTK Spiel
         </Link>

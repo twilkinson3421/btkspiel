@@ -7,8 +7,12 @@
   box-shadow: 0 0 var(--iii) black;
   justify-content: space-between;
 
-  * a:hover {
+  * a:hover,
+  * a:focus-visible,
+  * button:hover,
+  * button:focus-visible {
     background-color: #00000030;
+    outline: none;
   }
 
   > * {
@@ -42,6 +46,19 @@
         svg {
           font-size: 2rem;
         }
+      }
+    }
+
+    &__logout {
+      align-items: center;
+      background-color: transparent;
+      border: none;
+      color: var(--foreground);
+      padding: var(--x) var(--x);
+      gap: var(--iv);
+
+      svg {
+        font-size: 1.5rem;
       }
     }
   }

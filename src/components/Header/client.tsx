@@ -1,24 +1,35 @@
 'use client';
 import Link from 'next/link';
 import styles from './header.module.scss';
-import { useSession } from 'next-auth/react';
-import { MdOutlineAccountCircle } from 'react-icons/md';
+import { signOut, useSession } from 'next-auth/react';
+import { MdOutlineAccountCircle, MdLogout } from 'react-icons/md';
+import { Fragment } from 'react';
 
 export const Account = () => {
   const { data: session } = useSession();
 
+  async function Logout() {
+    await signOut();
+  }
+
   const HasAccount = () => {
     return (
-      <Link href='/features/my-account'>
-        {session?.user?.name}
-        <MdOutlineAccountCircle />
-      </Link>
+      <Fragment>
+        <button onClick={() => Logout()} className={styles.header__account__logout}>
+          Log Out
+          <MdLogout />
+        </button>
+        <Link tabIndex={0} href='/features/my-account'>
+          {session?.user?.name}
+          <MdOutlineAccountCircle />
+        </Link>
+      </Fragment>
     );
   };
 
   const NoAccount = () => {
     return (
-      <Link href='/zugang/login'>
+      <Link tabIndex={0} href='/zugang/login'>
         Log In
         <MdOutlineAccountCircle />
       </Link>
