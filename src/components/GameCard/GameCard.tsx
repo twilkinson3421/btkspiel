@@ -42,7 +42,7 @@ export default function GameCard({ game }: { game: Game }) {
       <main className={styles.container__main}>
         <span className={styles.container__main__rating}>{`⭐`.repeat(Math.round(game?.rating))}</span>
         <span className={styles.container__main__released}>Released: {localeReleased}</span>
-        <span className={styles.container__main__metacritic}>Metacritic: {game?.metacritic}</span>
+        <span className={styles.container__main__metacritic}>Metacritic: {game?.metacritic ?? '?'}</span>
         <span className={styles.container__main__genre}>Genre: {game?.genres[0]?.name}</span>
         {game?.esrb_rating?.id && game?.esrb_rating?.id !== 6 && (
           <img
