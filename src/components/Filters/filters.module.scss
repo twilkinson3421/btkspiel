@@ -1,0 +1,43 @@
+.filters {
+  margin-bottom: var(--xx);
+
+  &__form {
+    flex: 1;
+    flex-direction: column;
+    gap: var(--x);
+
+    &__search {
+      background-color: transparent;
+      border: var(--border);
+      border-radius: var(--border_radius);
+      padding: var(--x) var(--v);
+      color: var(--foreground);
+      box-shadow: var(--shadow_no_color) black;
+      background-color: #80808020;
+      font-size: 1.1rem;
+
+      &:focus-visible {
+        outline: none;
+        border-color: var(--link);
+      }
+    }
+
+    &__platforms {
+      flex-direction: column;
+      gap: var(--iii);
+
+      &__item {
+        gap: var(--v);
+      }
+    }
+
+    &__submit {
+      align-self: flex-start;
+      background-color: var(--accent);
+      border: var(--border);
+      border-radius: var(--border_radius);
+      padding: var(--v) var(--x);
+      color: var(--foreground);
+    }
+  }
+}

@@ -8,7 +8,11 @@ import Wrapper from '@/components/GameCard/Wrapper';
 import Pagination from '@/components/Pagination/Pagination';
 import Filters from '@/components/Filters/Filters';
 
-export default async function Games({ searchParams: { q, page } }: { searchParams: { q: string; page: number } }) {
+export default async function Games({
+  searchParams: { q, platforms, page },
+}: {
+  searchParams: { q: string; platforms: string; page: number };
+}) {
   const session = await getServerSession(config);
 
   const options = {
@@ -16,10 +20,11 @@ export default async function Games({ searchParams: { q, page } }: { searchParam
     page_size: 40,
     page: page ?? 1,
     SEARCH: q ? `&search=${q}` : '',
+    PLATFORMS: platforms ? `&parent_platforms=${platforms}` : '',
   };
 
   const games$res = await fetch(
-    `https://api.rawg.io/api/games?key=${options.key}&page=${options.page}&page_size=${options.page_size}${options.SEARCH}`,
+    `https://api.rawg.io/api/games?key=${options.key}&page=${options.page}&page_size=${options.page_size}${options.SEARCH}${options.PLATFORMS}`,
     {
       method: 'GET',
       headers: {
@@ -34,6 +39,9 @@ export default async function Games({ searchParams: { q, page } }: { searchParam
   return (
     <PageWrapper>
       <Filters />
+      <span className={styles.totalGames}>
+        Total Games:&nbsp;<mark>&nbsp;{games.count}&nbsp;</mark>
+      </span>
       <ul className={styles.list}>
         {games.results &&
           games.results.map((game: Game) => (

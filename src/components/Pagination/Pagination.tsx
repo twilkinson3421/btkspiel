@@ -15,7 +15,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
 
   useEffect(() => {
     setLower($current - 1);
-    setUpper(totalPages - $current);
+    setUpper(totalPages - current);
     setCurrent($current);
   }, [$current, current, totalPages]);
 
