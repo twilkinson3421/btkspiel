@@ -7,7 +7,6 @@ import { PiCaretDoubleLeftBold, PiCaretLeftBold, PiCaretDoubleRightBold, PiCaret
 export default function Pagination({ totalPages }: { totalPages: number }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { size } = searchParams;
   const $current: any = searchParams.get('page') ?? 1;
 
   useEffect(() => {
@@ -21,16 +20,29 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   const [current, setCurrent] = useState($current);
 
   function back(amount: number) {
-    lower >= amount && router.replace(`/games?${searchParams.toString().replace(/page=\d+/, `page=${current - amount}`)}`);
+    lower >= amount &&
+      router.replace(
+        `/games?${
+          searchParams.toString().includes('page')
+            ? searchParams.toString().replace(/page=\d+/, `page=${current - amount}`)
+            : `${searchParams.toString()}${searchParams.size > 0 ? '&' : ''}page=${current - amount}`
+        }`
+      );
   }
 
   function forward(amount: number) {
-    amount <= upper && router.replace(`/games?${searchParams.toString().replace(/page=\d+/, `page=${current - -1 * amount}`)}`);
+    amount <= upper &&
+      router.replace(
+        `/games?${
+          searchParams.toString().includes('page')
+            ? searchParams.toString().replace(/page=\d+/, `page=${current - -1 * amount}`)
+            : `${searchParams.toString()}${searchParams.size > 0 ? '&' : ''}page=${current - -1 * amount}`
+        }`
+      );
   }
 
   return (
     <nav className={styles.pagination}>
-      {searchParams.toString()}
       <div className={styles.pagination__buttons}>
         <button disabled={lower < 1000} onClick={() => back(1000)}>
           <PiCaretDoubleLeftBold />
