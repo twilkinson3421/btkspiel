@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styles from './game-card.module.scss';
-import { getPEGI } from '@/data/ratings';
+import { getESRB, getPEGI } from '@/data/ratings';
 
 export interface Game {
   id: number;
@@ -43,7 +43,16 @@ export default function GameCard({ game }: { game: Game }) {
             className={styles.container__main__pegi}
           />
         )}
-        <span>ESRB: {game.esrb_rating?.name ?? `Unknown`}</span>
+        {game?.esrb_rating?.id && (
+          <img
+            src={`/media/uploads/ESRB/ESRB_${getESRB(game?.esrb_rating?.id)}.svg`}
+            alt={game?.esrb_rating?.name}
+            draggable='false'
+            loading='lazy'
+            decoding='async'
+            className={styles.container__main__esrb}
+          />
+        )}
       </main>
     </Link>
   );

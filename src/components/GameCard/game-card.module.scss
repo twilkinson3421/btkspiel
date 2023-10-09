@@ -44,7 +44,15 @@
 
     &__pegi {
       position: absolute;
-      width: 12%;
+      height: var(--xv);
+      bottom: var(--xxx);
+      right: var(--v);
+      box-shadow: 0 0 var(--ii) var(--i) black;
+    }
+
+    &__esrb {
+      position: absolute;
+      width: var(--xv);
       bottom: var(--v);
       right: var(--v);
       box-shadow: 0 0 var(--ii) var(--i) black;
