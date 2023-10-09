@@ -36,11 +36,19 @@
   &__header {
     &__title {
       font-size: 1.75rem;
+      filter: drop-shadow(0 0 var(--ii) black);
     }
   }
 
   &__main {
     width: 80%;
+
+    &__rating,
+    &__released,
+    &__metacritic,
+    &__genre {
+      filter: drop-shadow(0 0 var(--i) black);
+    }
 
     &__pegi {
       position: absolute;

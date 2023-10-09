@@ -1,0 +1,48 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--accent);
+  align-items: stretch;
+  box-shadow: 0 0 var(--iii) black;
+  justify-content: space-between;
+
+  * a:hover {
+    background-color: #00000030;
+  }
+
+  > * {
+    align-items: center;
+  }
+
+  &__group {
+    a {
+      padding: var(--x) var(--x);
+      font-size: 1.5rem;
+      align-items: center;
+      gap: var(--iv);
+
+      svg {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  &__account {
+    align-items: stretch;
+
+    &__group {
+      align-items: stretch;
+
+      a {
+        align-items: center;
+        padding: var(--x) var(--x);
+        gap: var(--iv);
+
+        svg {
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+}

@@ -5,7 +5,6 @@ import type { Game } from '@/components/GameCard/GameCard';
 import GameCard from '@/components/GameCard/GameCard';
 import styles from './games.module.scss';
 import Wrapper from '@/components/GameCard/Wrapper';
-import Link from 'next/link';
 import Pagination from '@/components/Pagination/Pagination';
 
 export default async function Games({ searchParams: { page } }: { searchParams: { page: number } }) {
@@ -40,7 +39,7 @@ export default async function Games({ searchParams: { page } }: { searchParams: 
             </Wrapper>
           ))}
       </ul>
-      <Pagination totalPages={totalPages} current={page ?? 1} />
+      <Pagination totalPages={totalPages} />
     </PageWrapper>
   );
 }

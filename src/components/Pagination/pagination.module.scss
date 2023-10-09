@@ -1,0 +1,49 @@
+.pagination {
+  justify-content: center;
+  padding-top: var(--xx);
+
+  &__buttons {
+    button,
+    span {
+      padding: var(--v);
+      border: var(--border);
+      background-color: transparent;
+      color: var(--foreground);
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+
+      &:first-child {
+        border-radius: var(--v) 0 0 var(--v);
+      }
+
+      &:last-child {
+        border-radius: 0 var(--v) var(--v) 0;
+      }
+
+      &:not(:last-child) {
+        border-right: none;
+      }
+
+      &:is(button):hover:not(:disabled) {
+        background-color: var(--accent);
+
+        &:not(:first-child) {
+          border-left-color: var(--accent);
+        }
+
+        &:not(:last-child) + * {
+          border-left-color: var(--accent);
+        }
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+
+        svg {
+          opacity: 0.4;
+        }
+      }
+    }
+  }
+}
