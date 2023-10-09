@@ -6,6 +6,7 @@ import GameCard from '@/components/GameCard/GameCard';
 import styles from './games.module.scss';
 import Wrapper from '@/components/GameCard/Wrapper';
 import Pagination from '@/components/Pagination/Pagination';
+import Filters from '@/components/Filters/Filters';
 
 export default async function Games({ searchParams: { page } }: { searchParams: { page: number } }) {
   const session = await getServerSession(config);
@@ -31,6 +32,7 @@ export default async function Games({ searchParams: { page } }: { searchParams: 
 
   return (
     <PageWrapper>
+      <Filters />
       <ul className={styles.list}>
         {games.results &&
           games.results.map((game: Game) => (

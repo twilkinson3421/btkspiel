@@ -7,6 +7,7 @@ import { PiCaretDoubleLeftBold, PiCaretLeftBold, PiCaretDoubleRightBold, PiCaret
 export default function Pagination({ totalPages }: { totalPages: number }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { size } = searchParams;
   const $current: any = searchParams.get('page') ?? 1;
 
   useEffect(() => {
@@ -19,24 +20,17 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   const [upper, setUpper] = useState(totalPages - $current);
   const [current, setCurrent] = useState($current);
 
-  function back(amount: number | undefined) {
-    if (amount) {
-      lower >= amount && router.replace(`/games?page=${current - amount}`);
-    } else {
-      lower > 0 && router.replace(`/games?page=${current - 1}`);
-    }
+  function back(amount: number) {
+    lower >= amount && router.replace(`/games?${searchParams.toString().replace(/page=\d+/, `page=${current - amount}`)}`);
   }
 
-  function forward(amount: number | undefined) {
-    if (amount) {
-      amount <= upper && router.replace(`/games?page=${current - -1 * amount}`);
-    } else {
-      upper > 0 && router.replace(`/games?page=${current - -1}`);
-    }
+  function forward(amount: number) {
+    amount <= upper && router.replace(`/games?${searchParams.toString().replace(/page=\d+/, `page=${current - -1 * amount}`)}`);
   }
 
   return (
     <nav className={styles.pagination}>
+      {searchParams.toString()}
       <div className={styles.pagination__buttons}>
         <button disabled={lower < 1000} onClick={() => back(1000)}>
           <PiCaretDoubleLeftBold />
@@ -49,11 +43,11 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
         <button disabled={lower < 10} onClick={() => back(10)}>
           <PiCaretDoubleLeftBold />
         </button>
-        <button disabled={lower < 1} onClick={() => back(undefined)}>
+        <button disabled={lower < 1} onClick={() => back(1)}>
           <PiCaretLeftBold />
         </button>
         <span>{current}</span>
-        <button disabled={upper < 1} onClick={() => forward(undefined)}>
+        <button disabled={upper < 1} onClick={() => forward(1)}>
           <PiCaretRightBold />
         </button>
         <button disabled={upper < 10} onClick={() => forward(10)}>
