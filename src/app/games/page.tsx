@@ -8,17 +8,18 @@ import Wrapper from '@/components/GameCard/Wrapper';
 import Pagination from '@/components/Pagination/Pagination';
 import Filters from '@/components/Filters/Filters';
 
-export default async function Games({ searchParams: { page } }: { searchParams: { page: number } }) {
+export default async function Games({ searchParams: { q, page } }: { searchParams: { q: string; page: number } }) {
   const session = await getServerSession(config);
 
   const options = {
     key: process.env.NEXT_PUBLIC_RAWG_API_KEY,
     page_size: 40,
     page: page ?? 1,
+    SEARCH: q ? `&search=${q}` : '',
   };
 
   const games$res = await fetch(
-    `https://api.rawg.io/api/games?key=${options.key}&page_size=${options.page_size}&page=${options.page}`,
+    `https://api.rawg.io/api/games?key=${options.key}&page=${options.page}&page_size=${options.page_size}${options.SEARCH}`,
     {
       method: 'GET',
       headers: {

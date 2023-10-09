@@ -9,15 +9,15 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   const searchParams = useSearchParams();
   const $current: any = searchParams.get('page') ?? 1;
 
+  const [current, setCurrent] = useState($current);
+  const [lower, setLower] = useState(current - 1);
+  const [upper, setUpper] = useState(totalPages - current);
+
   useEffect(() => {
     setLower($current - 1);
     setUpper(totalPages - $current);
     setCurrent($current);
-  }, [$current]);
-
-  const [lower, setLower] = useState($current - 1);
-  const [upper, setUpper] = useState(totalPages - $current);
-  const [current, setCurrent] = useState($current);
+  }, [$current, current, totalPages]);
 
   function back(amount: number) {
     lower >= amount &&
