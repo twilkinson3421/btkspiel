@@ -53,6 +53,10 @@
           padding: 0 var(--ii);
         }
 
+        * input:focus-visible {
+          outline: solid var(--i) var(--foreground);
+        }
+
         * input[type='checkbox'] {
           appearance: none;
           accent-color: var(--accent);
@@ -129,7 +133,6 @@
     &__sort {
       &__list {
         flex-wrap: wrap;
-        // justify-content: space-between;
         gap: var(--iii) var(--xx);
 
         &__item {

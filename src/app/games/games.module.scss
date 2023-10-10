@@ -1,9 +1,18 @@
 .totalGames {
-  padding-bottom: var(--xx);
+  margin-bottom: var(--xx);
+  padding: var(--v);
+  color: black;
+  background-color: var(--success);
+  align-self: flex-start;
 }
 
 .list {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+
+  @media screen and (min-width: 900px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
   gap: var(--xxv);
 }

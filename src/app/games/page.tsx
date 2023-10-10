@@ -50,9 +50,7 @@ export default async function Games({
   return (
     <PageWrapper>
       <Filters />
-      <span className={styles.totalGames}>
-        Games Found:&nbsp;<mark>&nbsp;{games.count}&nbsp;</mark>
-      </span>
+      <span className={styles.totalGames}>Games Found: {games.count}</span>
       <ul className={styles.list}>
         {games.results &&
           games.results.map((game: Game) => (
