@@ -9,6 +9,7 @@
   object-position: top center;
   filter: brightness(0.5) blur(2px) contrast(0.9);
   user-select: none;
+  background-color: black;
 }
 
 .container {
@@ -82,6 +83,15 @@
       }
     }
   }
+}
+
+.source {
+  align-self: flex-start;
+  color: var(--link);
+  text-decoration: underline;
+  align-items: center;
+  gap: var(--iii);
+  font-style: italic;
 }
 
 .description {

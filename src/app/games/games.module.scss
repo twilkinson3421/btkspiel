@@ -1,3 +1,13 @@
+.source {
+  margin-bottom: var(--x);
+  align-self: flex-start;
+  color: var(--link);
+  text-decoration: underline;
+  align-items: center;
+  gap: var(--iii);
+  font-style: italic;
+}
+
 .totalGames {
   margin-bottom: var(--xx);
   padding: var(--v);

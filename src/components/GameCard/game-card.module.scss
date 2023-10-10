@@ -25,6 +25,7 @@
     z-index: 1;
     object-fit: cover;
     filter: brightness(0.25) blur(1px) contrast(0.9);
+    user-select: none;
   }
 
   &:hover {
@@ -60,6 +61,7 @@
       bottom: var(--xxx);
       right: var(--v);
       box-shadow: 0 0 var(--ii) var(--i) black;
+      user-select: none;
     }
 
     &__esrb {
@@ -68,6 +70,7 @@
       bottom: var(--v);
       right: var(--v);
       box-shadow: 0 0 var(--ii) var(--i) black;
+      user-select: none;
     }
   }
 }

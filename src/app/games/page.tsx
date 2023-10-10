@@ -8,6 +8,8 @@ import Wrapper from '@/components/GameCard/Wrapper';
 import Pagination from '@/components/Pagination/Pagination';
 import Filters from '@/components/Filters/Filters';
 import { genres as $genres } from '@/data/genres';
+import Link from 'next/link';
+import { MdOpenInNew } from 'react-icons/md';
 
 export default async function Games({
   searchParams: { q, platforms, genres, sort, page },
@@ -50,6 +52,9 @@ export default async function Games({
   return (
     <PageWrapper>
       <Filters />
+      <Link href={'https://rawg.io'} rel='noopener noreferrer' target='_blank' className={styles.source}>
+        Data from RAWG.IO <MdOpenInNew />
+      </Link>
       <span className={styles.totalGames}>Games Found: {games.count}</span>
       <ul className={styles.list}>
         {games.results &&

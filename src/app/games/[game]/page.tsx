@@ -2,8 +2,7 @@ import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import styles from './game.module.scss';
 import Link from 'next/link';
 import { getESRB, getPEGI } from '@/data/ratings';
-import { HiOutlineExternalLink } from 'react-icons/hi';
-import { MdCalendarMonth } from 'react-icons/md';
+import { MdOpenInNew, MdCalendarMonth } from 'react-icons/md';
 
 interface Game {
   // ! Individual game (!= Game from list)
@@ -137,10 +136,13 @@ export default async function Game({ params: { game: slug } }: { params: { game:
             </ul>
           </section>
         </section>
+        <Link href={'https://rawg.io'} rel='noopener noreferrer' target='_blank' className={styles.source}>
+          Data from RAWG.IO <MdOpenInNew />
+        </Link>
         <p className={styles.description}>
           {game.description_raw}
           <Link href={game.website} rel='noopener noreferrer' target='_blank' className={styles.link}>
-            Game Website <HiOutlineExternalLink />
+            Game Website <MdOpenInNew />
           </Link>
         </p>
         <ul className={styles.genres}>
