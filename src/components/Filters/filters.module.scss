@@ -22,12 +22,53 @@
       }
     }
 
+    &__advanced {
+      gap: var(--x);
+    }
+
     &__platforms {
       flex-direction: column;
       gap: var(--iii);
 
+      &__set {
+        padding: var(--v) var(--x);
+        background-color: #80808020;
+        border: var(--border);
+        border-radius: var(--border_radius);
+        box-shadow: 0 0 var(--iii) black;
+
+        legend {
+          padding: 0 var(--ii);
+        }
+      }
+
       &__item {
         gap: var(--v);
+      }
+    }
+
+    &__genres {
+      &__set {
+        padding: var(--v) var(--x);
+        background-color: #80808020;
+        border: var(--border);
+        border-radius: var(--border_radius);
+        box-shadow: 0 0 var(--iii) black;
+
+        legend {
+          padding: 0 var(--ii);
+        }
+      }
+
+      &__list {
+        flex-wrap: wrap;
+        gap: 0 var(--xx);
+        align-items: flex-start;
+
+        &__item {
+          align-items: center;
+          gap: var(--v);
+        }
       }
     }
 

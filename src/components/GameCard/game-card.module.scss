@@ -48,6 +48,10 @@
     &__metacritic,
     &__genre {
       filter: drop-shadow(0 0 var(--i) black);
+
+      &:not(.container__main__rating) {
+        font-style: italic;
+      }
     }
 
     &__pegi {
