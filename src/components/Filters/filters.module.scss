@@ -6,7 +6,24 @@
     flex-direction: column;
     gap: var(--x);
 
+    &__normal {
+      gap: var(--x);
+
+      &__open {
+        flex: 0;
+        align-self: center;
+        background-color: transparent;
+        border: none;
+
+        svg {
+          font-size: 1.5rem;
+          color: var(--foreground);
+        }
+      }
+    }
+
     &__search {
+      flex: 1;
       background-color: transparent;
       border: var(--border);
       border-radius: var(--border_radius);
@@ -24,50 +41,101 @@
 
     &__advanced {
       gap: var(--x);
+
+      fieldset {
+        padding: var(--v) var(--x);
+        background-color: #80808020;
+        border: var(--border);
+        border-radius: var(--border_radius);
+        box-shadow: 0 0 var(--iii) black;
+
+        legend {
+          padding: 0 var(--ii);
+        }
+
+        * input[type='checkbox'] {
+          appearance: none;
+          accent-color: var(--accent);
+          align-items: center;
+          justify-content: center;
+          width: 1.2rem;
+          aspect-ratio: 1 / 1;
+          border: var(--border);
+          border-radius: var(--i);
+          background-color: transparent;
+          cursor: pointer;
+          position: relative;
+
+          &:checked {
+            background-color: var(--accent);
+
+            &::before {
+              content: '\2714';
+              color: var(--foreground);
+              font-size: 0.7rem;
+            }
+          }
+        }
+
+        * input[type='radio'] {
+          appearance: none;
+          align-items: center;
+          justify-content: center;
+          width: 1.2rem;
+          aspect-ratio: 1 / 1;
+          border: var(--border);
+          border-radius: 100%;
+          background-color: transparent;
+          cursor: pointer;
+          position: relative;
+
+          &:checked {
+            background-color: var(--accent);
+
+            &::before {
+              content: '\2714';
+              color: var(--foreground);
+              font-size: 0.6rem;
+            }
+          }
+        }
+      }
     }
 
     &__platforms {
       flex-direction: column;
       gap: var(--iii);
 
-      &__set {
-        padding: var(--v) var(--x);
-        background-color: #80808020;
-        border: var(--border);
-        border-radius: var(--border_radius);
-        box-shadow: 0 0 var(--iii) black;
-
-        legend {
-          padding: 0 var(--ii);
-        }
-      }
-
       &__item {
         gap: var(--v);
+        align-items: center;
       }
     }
 
     &__genres {
-      &__set {
-        padding: var(--v) var(--x);
-        background-color: #80808020;
-        border: var(--border);
-        border-radius: var(--border_radius);
-        box-shadow: 0 0 var(--iii) black;
-
-        legend {
-          padding: 0 var(--ii);
-        }
-      }
-
       &__list {
         flex-wrap: wrap;
-        gap: 0 var(--xx);
+        justify-content: space-between;
+        gap: var(--iii) var(--xx);
         align-items: flex-start;
 
         &__item {
           align-items: center;
           gap: var(--v);
+        }
+      }
+    }
+
+    &__sort {
+      &__list {
+        flex-wrap: wrap;
+        // justify-content: space-between;
+        gap: var(--iii) var(--xx);
+
+        &__item {
+          align-items: center;
+          gap: var(--v);
+          align-self: flex-start;
         }
       }
     }

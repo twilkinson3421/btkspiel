@@ -7,25 +7,35 @@ import styles from './games.module.scss';
 import Wrapper from '@/components/GameCard/Wrapper';
 import Pagination from '@/components/Pagination/Pagination';
 import Filters from '@/components/Filters/Filters';
+import { genres as $genres } from '@/data/genres';
 
 export default async function Games({
-  searchParams: { q, platforms, genres, page },
+  searchParams: { q, platforms, genres, sort, page },
 }: {
-  searchParams: { q: string; platforms: string; genres: string; page: number };
+  searchParams: { q: string; platforms: string; genres: string; sort: string; page: number };
 }) {
   const session = await getServerSession(config);
+
+  if (genres) {
+    $genres.forEach(($genre: any) => {
+      if (genres.includes($genre.id.toString())) {
+        genres = genres.replace($genre.id.toString(), $genre.cor);
+      }
+    });
+  }
 
   const options = {
     key: process.env.NEXT_PUBLIC_RAWG_API_KEY,
     page_size: 40,
     page: page ?? 1,
-    SEARCH: q ? `&search=${q}` : '',
-    PLATFORMS: platforms ? `&parent_platforms=${platforms}` : '',
-    GENRES: genres ? `&genres=${genres}` : '',
+    SEARCH: q ? `&search=${encodeURIComponent(q)}` : '',
+    PLATFORMS: platforms ? `&parent_platforms=${encodeURIComponent(platforms)}` : '',
+    GENRES: genres ? `&genres=${encodeURIComponent(genres)}` : '',
+    SORT: sort ? `&ordering=${sort}` : '',
   };
 
   const games$res = await fetch(
-    `https://api.rawg.io/api/games?key=${options.key}&page=${options.page}&page_size=${options.page_size}${options.SEARCH}${options.PLATFORMS}${options.GENRES}`,
+    `https://api.rawg.io/api/games?key=${options.key}&page=${options.page}&page_size=${options.page_size}${options.SEARCH}${options.PLATFORMS}${options.GENRES}${options.SORT}`,
     {
       method: 'GET',
       headers: {
