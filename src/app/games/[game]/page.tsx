@@ -102,7 +102,7 @@ export default async function Game({ params: { game: slug } }: { params: { game:
               Updated: {localeUpdated}
             </span>
             <span className={styles.details__upper__rating}>{`⭐`.repeat(Math.round(game?.rating))}</span>
-            <span className={styles.details__upper__metacritic}>Metacritic: {game.metacritic}</span>
+            <span className={styles.details__upper__metacritic}>Metacritic: {game?.metacritic ?? '?'}</span>
             <span className={styles.details__upper__publisher}>Publisher: {game.publishers[0]?.name}</span>
           </section>
           <section className={styles.details__middle}>
