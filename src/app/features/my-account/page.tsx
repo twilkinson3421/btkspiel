@@ -156,9 +156,14 @@ export default function Account() {
       <article className={styles.container__main__data__container}>
         <h1 className={styles.container__main__data__container__title}>{title}</h1>
         <ul className={styles.container__main__data__container__datalist}>
+          {games.length === 0 && (
+            <li className={styles.container__main__data__container__datalist__item}>
+              <h1 className={styles.container__main__data__container__datalist__item__title}>No {title.toLowerCase()}</h1>
+            </li>
+          )}
           {games.map(({ id, name, slug }: { id: number; name: string; slug: string }) => {
             return (
-              <li key={`${id}_${title.toLocaleLowerCase()}`} className={styles.container__main__data__container__datalist__item}>
+              <li key={`${id}_${title.toLowerCase()}`} className={styles.container__main__data__container__datalist__item}>
                 <h1 className={styles.container__main__data__container__datalist__item__title}>{name}</h1>
                 <div>
                   <button
