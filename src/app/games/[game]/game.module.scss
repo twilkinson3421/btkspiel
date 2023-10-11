@@ -25,21 +25,26 @@
 }
 
 .header {
-  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--xx);
 
-  &__title {
-    font-size: 3rem;
-  }
+  &__group {
+    flex-direction: column;
 
-  &__developer {
-    font-style: italic;
-    opacity: 0.8;
+    &__title {
+      font-size: 3rem;
+    }
+
+    &__developer {
+      font-style: italic;
+      opacity: 0.8;
+    }
   }
 }
 
 .details {
   flex-direction: column;
-  gap: var(--x);
+  gap: var(--xx);
 
   &__upper,
   &__middle,

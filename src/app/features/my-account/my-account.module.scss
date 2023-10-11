@@ -36,7 +36,7 @@
   }
 
   &__main {
-    gap: var(--x);
+    gap: var(--xx);
 
     &__hgroup {
       flex-direction: column;
@@ -48,17 +48,108 @@
       }
     }
 
+    &__error {
+      background-color: var(--error);
+      color: var(--foreground);
+      padding: var(--iii) var(--viii);
+      border-radius: var(--border_radius);
+      align-self: flex-start;
+    }
+
     &__button {
       align-self: flex-start;
       padding: var(--iii) var(--viii);
-      background-color: var(--accent);
+      background-color: var(--error);
       color: var(--foreground);
       border: var(--border);
       border-radius: var(--border_radius);
 
       &:hover {
         background-color: var(--foreground);
-        color: var(--accent);
+        color: var(--error);
+      }
+    }
+
+    &__data {
+      gap: var(--xx);
+
+      &__container {
+        flex-direction: column;
+        gap: var(--v);
+
+        &__title {
+          font-size: 1.25rem;
+        }
+
+        &__datalist {
+          flex-direction: column;
+          gap: var(--v);
+
+          &__item {
+            flex: 1;
+            background-color: #00001080;
+            padding: var(--iii) var(--iii) var(--iii) var(--viii);
+            border: var(--border);
+            border-radius: var(--border_radius);
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--x);
+
+            div {
+              /* Button & Link container */
+              align-items: stretch;
+              gap: var(--v);
+            }
+
+            button {
+              background-color: var(--error);
+              color: var(--foreground);
+              padding: var(--iii) var(--viii);
+              border: none;
+              border-radius: var(--border_radius);
+              align-items: center;
+              gap: var(--v);
+
+              &:hover {
+                background-color: var(--foreground);
+                color: var(--error);
+
+                svg {
+                  color: var(--error);
+                }
+              }
+
+              svg {
+                font-size: 1.5rem;
+                color: var(--foreground);
+              }
+            }
+
+            a {
+              background-color: var(--accent);
+              color: var(--foreground);
+              padding: var(--iii) var(--viii);
+              border: none;
+              border-radius: var(--border_radius);
+              align-items: center;
+              gap: var(--v);
+
+              &:hover {
+                background-color: var(--foreground);
+                color: var(--accent);
+
+                svg {
+                  color: var(--accent);
+                }
+              }
+
+              svg {
+                font-size: 1.5rem;
+                color: var(--foreground);
+              }
+            }
+          }
+        }
       }
     }
   }

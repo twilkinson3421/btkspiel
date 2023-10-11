@@ -5,7 +5,7 @@ import { getESRB, getPEGI } from '@/data/ratings';
 import { MdOpenInNew, MdCalendarMonth } from 'react-icons/md';
 import { Fragment } from 'react';
 import ClientMeta from './ClientMeta';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Interactive from './Interactive';
 import { config } from '@/helpers/auth';
 import { getServerSession } from 'next-auth';
@@ -73,16 +73,20 @@ export default async function Game({ params: { game: slug } }: { params: { game:
     key: process.env.NEXT_PUBLIC_RAWG_API_KEY,
   };
 
-  const games$res = await fetch(`https://api.rawg.io/api/games/${slug}?key=${options.key}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  let game: Game | null = null;
 
-  const game: Game = await games$res.json();
+  try {
+    const games$res = await fetch(`https://api.rawg.io/api/games/${slug}?key=${options.key}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-  if (typeof game?.detail === 'string') {
+    game = await games$res.json();
+  } catch (error) {}
+
+  if (typeof game?.detail === 'string' || !game) {
     notFound();
     return null;
   }
@@ -99,8 +103,10 @@ export default async function Game({ params: { game: slug } }: { params: { game:
         <img src={game.background_image} alt={game.name} draggable='false' loading='lazy' decoding='async' className={styles.image} />
         <main className={styles.container}>
           <header className={styles.header}>
-            <h1 className={styles.header__title}>{game.name}</h1>
-            <h2 className={styles.header__developer}>{game.developers[0]?.name}</h2>
+            <hgroup className={styles.header__group}>
+              <h1 className={styles.header__group__title}>{game.name}</h1>
+              <h2 className={styles.header__group__developer}>{game.developers[0]?.name}</h2>
+            </hgroup>
             {session && <Interactive username={session.user.name} id={game.id} name={game.name} slug={game.slug} />}
           </header>
           <section className={styles.details}>

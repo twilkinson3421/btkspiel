@@ -17,6 +17,7 @@ export default function NotFound() {
             <span>Page Not Found</span>
           </h1>
           <h2>The page you are looking for does not exist, has been removed, or is temporarily unavailable.</h2>
+          <h2>Try again later.</h2>
         </hgroup>
         <span className={styles.container__requested}>{pathname}</span>
         <nav>

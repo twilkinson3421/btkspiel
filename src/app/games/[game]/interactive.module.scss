@@ -1,0 +1,58 @@
+.interactive {
+  align-self: flex-start;
+  gap: var(--x);
+
+  &__button {
+    padding: var(--iii) var(--viii);
+    background-color: var(--accent);
+    color: var(--foreground);
+    border: var(--border);
+    border-radius: var(--border_radius);
+    align-items: center;
+    justify-content: center;
+
+    &:disabled {
+      opacity: 0.25;
+      cursor: default;
+      background-color: var(--background);
+    }
+
+    &:hover:not(:disabled) {
+      background-color: var(--foreground);
+      color: var(--accent);
+
+      span svg {
+        color: var(--accent);
+      }
+    }
+
+    &__remove {
+      background-color: var(--error);
+
+      &:hover:not(:disabled) {
+        background-color: var(--foreground);
+        color: var(--error);
+
+        span svg {
+          color: var(--error);
+        }
+      }
+    }
+
+    span {
+      align-items: center;
+      gap: var(--iii);
+
+      svg {
+        font-size: 1.5rem;
+        color: var(--foreground);
+      }
+    }
+  }
+
+  &__error {
+    background-color: var(--error);
+    padding: var(--iii) var(--viii);
+    border-radius: var(--border_radius);
+  }
+}

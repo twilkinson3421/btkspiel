@@ -1,6 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
 import styles from './interactive.module.scss';
+import classNames from 'classnames';
+import { IoMdAddCircleOutline, IoMdTrash } from 'react-icons/io';
 
 export default function Interactive({ username, id, name, slug }: { username: string; id: number; name: string; slug: string }) {
   const [hasGame, setHasGame] = useState(false);
@@ -50,6 +52,7 @@ export default function Interactive({ username, id, name, slug }: { username: st
   }
 
   async function addGameToOwned() {
+    setCheckedHas(false);
     try {
       const add$res = await fetch('/api/games/owned/add', {
         method: 'POST',
@@ -75,6 +78,7 @@ export default function Interactive({ username, id, name, slug }: { username: st
   }
 
   async function removeGameFromOwned() {
+    setCheckedHas(false);
     try {
       const remove$res = await fetch('/api/games/owned/remove', {
         method: 'POST',
@@ -133,6 +137,7 @@ export default function Interactive({ username, id, name, slug }: { username: st
   }
 
   async function addGameToWishlist() {
+    setCheckedWishes(false);
     try {
       const add$res = await fetch('/api/games/wishlist/add', {
         method: 'POST',
@@ -158,6 +163,7 @@ export default function Interactive({ username, id, name, slug }: { username: st
   }
 
   async function removeGameFromWishlist() {
+    setCheckedWishes(false);
     try {
       const remove$res = await fetch('/api/games/wishlist/remove', {
         method: 'POST',
@@ -185,20 +191,40 @@ export default function Interactive({ username, id, name, slug }: { username: st
   return (
     <section className={styles.interactive}>
       <button
-        disabled={!checkedHas}
-        className={styles.interactive__button}
+        disabled={!checkedHas || error.error}
+        className={classNames(styles.interactive__button, hasGame && styles.interactive__button__remove)}
         onClick={() => (hasGame ? removeGameFromOwned() : addGameToOwned())}
       >
-        {hasGame ? 'Remove from Owned' : 'Add to Owned'}
+        {hasGame ? (
+          <span>
+            Remove from Owned
+            <IoMdTrash />
+          </span>
+        ) : (
+          <span>
+            Add to Owned
+            <IoMdAddCircleOutline />
+          </span>
+        )}
       </button>
       <button
-        disabled={!checkedWishes}
-        className={styles.interactive__button}
+        disabled={!checkedWishes || error.error}
+        className={classNames(styles.interactive__button, wishesGame && styles.interactive__button__remove)}
         onClick={() => (wishesGame ? removeGameFromWishlist() : addGameToWishlist())}
       >
-        {wishesGame ? 'Remove from Wish List' : 'Add to Wish List'}
+        {wishesGame ? (
+          <span>
+            Remove from Wishlist
+            <IoMdTrash />
+          </span>
+        ) : (
+          <span>
+            Add to Wishlist
+            <IoMdAddCircleOutline />
+          </span>
+        )}
       </button>
-      {error.error && <span>{error.message}</span>}
+      {error.error && <span className={styles.interactive__error}>{error.message}</span>}
     </section>
   );
 }
