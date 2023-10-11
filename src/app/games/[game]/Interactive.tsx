@@ -26,19 +26,17 @@ export default function Interactive({ username, id, name, slug }: { username: st
 
       const { owned } = await response.json();
 
+      let found = false;
+
       owned &&
         owned.forEach(({ id: $id, name: $name, slug: $slug }: { id: number; name: string; slug: string }) => {
           if ($id === id && $name === name && $slug === slug) {
-            setHasGame(true);
-            setCheckedHas(true);
+            found = true;
             return;
-          } else {
-            setHasGame(false);
-            setCheckedHas(true);
           }
         });
 
-      !owned && setHasGame(false);
+      setHasGame(found);
       setCheckedHas(true);
     } catch (error) {
       console.log(error);
@@ -48,7 +46,7 @@ export default function Interactive({ username, id, name, slug }: { username: st
 
   async function addGameToOwned() {
     try {
-      await fetch('/api/games/owned/add', {
+      const add$res = await fetch('/api/games/owned/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,14 +61,37 @@ export default function Interactive({ username, id, name, slug }: { username: st
         }),
       });
 
-      checkHasGame();
+      if (add$res.ok) {
+        checkHasGame();
+      }
     } catch (error) {
       setError({ error: true, message: 'Something went wrong [912 Internal]' });
     }
   }
 
   async function removeGameFromOwned() {
-    [];
+    try {
+      const remove$res = await fetch('/api/games/owned/remove', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: username,
+          game: {
+            id,
+            name,
+            slug,
+          },
+        }),
+      });
+
+      if (remove$res.ok) {
+        checkHasGame();
+      }
+    } catch (error) {
+      setError({ error: true, message: 'Something went wrong [913 Internal]' });
+    }
   }
 
   return (
