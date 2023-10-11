@@ -1,7 +1,15 @@
 import mongoose, { Schema, models } from 'mongoose';
 
 const gamesSchema = new Schema({
+  id: {
+    type: Number,
+    required: true,
+  },
   name: {
+    type: String,
+    required: true,
+  },
+  slug: {
     type: String,
     required: true,
   },

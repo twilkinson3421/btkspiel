@@ -6,12 +6,16 @@ import { MdOpenInNew, MdCalendarMonth } from 'react-icons/md';
 import { Fragment } from 'react';
 import ClientMeta from './ClientMeta';
 import { notFound } from 'next/navigation';
+import Interactive from './Interactive';
+import { config } from '@/helpers/auth';
+import { getServerSession } from 'next-auth';
 
 interface Game {
   // ! Individual game (!= Game from list)
   detail: any;
   id: number;
   name: string;
+  slug: string;
   metacritic: number;
   released: string;
   updated: string;
@@ -63,6 +67,8 @@ interface Game {
 }
 
 export default async function Game({ params: { game: slug } }: { params: { game: string } }) {
+  const session: any = await getServerSession(config);
+
   const options = {
     key: process.env.NEXT_PUBLIC_RAWG_API_KEY,
   };
@@ -95,6 +101,7 @@ export default async function Game({ params: { game: slug } }: { params: { game:
           <header className={styles.header}>
             <h1 className={styles.header__title}>{game.name}</h1>
             <h2 className={styles.header__developer}>{game.developers[0]?.name}</h2>
+            {session && <Interactive username={session.user.name} id={game.id} name={game.name} slug={game.slug} />}
           </header>
           <section className={styles.details}>
             <section className={styles.details__upper}>
