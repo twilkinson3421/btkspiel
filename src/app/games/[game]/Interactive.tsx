@@ -46,7 +46,6 @@ export default function Interactive({ username, id, name, slug }: { username: st
       setHasGame(found);
       setCheckedHas(true);
     } catch (error) {
-      console.log(error);
       setError({ error: true, message: 'Something went wrong [910 Internal]' });
     }
   }
@@ -131,7 +130,6 @@ export default function Interactive({ username, id, name, slug }: { username: st
       setWishesGame(found);
       setCheckedWishes(true);
     } catch (error) {
-      console.log(error);
       setError({ error: true, message: 'Something went wrong [917 Internal]' });
     }
   }

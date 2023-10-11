@@ -84,8 +84,6 @@ export default function Filters() {
     const sortSlug = await getSortValues();
     const reverseSort = await reverseIsChecked();
 
-    console.log(sortSlug);
-
     const params = {
       q: query ? `?q=${query}` : '',
       platforms: platforms ? `${query ? '&' : '?'}platforms=${platforms}` : '',
