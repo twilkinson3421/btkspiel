@@ -3,6 +3,7 @@ import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { register } from 'module';
+import styles from '../zugang.module.scss';
 
 export default function Register() {
   const [name, setName] = useState('');
@@ -67,24 +68,52 @@ export default function Register() {
 
   return (
     <PageWrapper>
-      <h1>Register</h1>
-      <form onSubmit={(e) => register(e)}>
-        <input name='name' type='text' placeholder='Username...' autoComplete='off' onChange={(e) => setName(e.target.value)} />
-        <input name='email' type='email' placeholder='Email...' autoComplete='off' onChange={(e) => setEmail(e.target.value)} />
-        <input
-          name='password'
-          type='password'
-          placeholder='Password...'
-          autoComplete='off'
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {error.error && <span>{error.message}</span>}
-        <button type='submit'>Register</button>
-      </form>
-      <aside>
-        <span>Already have an account?</span>
-        <button onClick={() => router.replace('/zugang/login')}>Login</button>
-      </aside>
+      <section className={styles.container}>
+        <h1 className={styles.container__title}>Register</h1>
+        <form onSubmit={(e) => register(e)} className={styles.container__form}>
+          <input
+            className={styles.container__form__input}
+            name='name'
+            type='text'
+            placeholder='Username'
+            autoComplete='off'
+            onChange={(e) => {
+              setName(e.target.value);
+              setError({ error: false, message: '' });
+            }}
+          />
+          <input
+            className={styles.container__form__input}
+            name='email'
+            type='email'
+            placeholder='Email'
+            autoComplete='off'
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setError({ error: false, message: '' });
+            }}
+          />
+          <input
+            className={styles.container__form__input}
+            name='password'
+            type='password'
+            placeholder='Password'
+            autoComplete='off'
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setError({ error: false, message: '' });
+            }}
+          />
+          {error.error && <span className={styles.container__form__error}>{error.message}</span>}
+          <button className={styles.container__form__submit} type='submit'>
+            Register
+          </button>
+        </form>
+        <aside className={styles.container__aside}>
+          <span>Already have an account?</span>
+          <button onClick={() => router.replace('/zugang/login')}>Login</button>
+        </aside>
+      </section>
     </PageWrapper>
   );
 }
