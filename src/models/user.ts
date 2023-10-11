@@ -1,5 +1,12 @@
 import mongoose, { Schema, models } from 'mongoose';
 
+const gamesSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+});
+
 const userSchema = new Schema(
   {
     name: {
@@ -13,6 +20,16 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
+    },
+    games: {
+      type: {
+        owned: [gamesSchema],
+        wishlist: [gamesSchema],
+      },
+      default: {
+        owned: [],
+        wishlist: [],
+      },
     },
   },
   { timestamps: true }

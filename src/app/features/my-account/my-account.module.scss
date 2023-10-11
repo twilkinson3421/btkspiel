@@ -1,0 +1,65 @@
+.loading {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--x);
+  flex-direction: column;
+  flex: 1;
+
+  svg {
+    font-size: 4rem;
+    animation: spinner 1s ease-in-out infinite;
+
+    @keyframes spinner {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+.container {
+  flex-direction: column;
+  gap: var(--x);
+
+  &__header {
+    &__title {
+      font-size: 2rem;
+    }
+  }
+
+  &__main {
+    gap: var(--x);
+
+    &__hgroup {
+      flex-direction: column;
+      gap: var(--v);
+
+      h1 {
+        font-size: 1.25rem;
+        font-style: italic;
+      }
+    }
+
+    &__button {
+      align-self: flex-start;
+      padding: var(--iii) var(--viii);
+      background-color: var(--accent);
+      color: var(--foreground);
+      border: var(--border);
+      border-radius: var(--border_radius);
+
+      &:hover {
+        background-color: var(--foreground);
+        color: var(--accent);
+      }
+    }
+  }
+}
