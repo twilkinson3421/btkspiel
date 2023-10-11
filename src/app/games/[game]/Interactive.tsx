@@ -103,6 +103,7 @@ export default function Interactive({ username, id, name, slug }: { username: st
       >
         {hasGame ? 'Remove from Owned' : 'Add to Owned'}
       </button>
+      <button>Add to Wishlist</button>
       {error.error && <span>{error.message}</span>}
     </section>
   );
