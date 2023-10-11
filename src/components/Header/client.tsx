@@ -36,6 +36,10 @@ export const Account = () => {
     );
   };
 
+  if (typeof session === 'undefined') {
+    return null;
+  }
+
   return (
     <section className={styles.header__account}>
       <hgroup className={styles.header__account__group}>{session ? <HasAccount /> : <NoAccount />}</hgroup>

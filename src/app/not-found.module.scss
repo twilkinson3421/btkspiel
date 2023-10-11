@@ -1,0 +1,52 @@
+.container {
+  align-items: center;
+  justify-content: center;
+  gap: var(--x);
+  flex-direction: column;
+  flex: 1;
+
+  &__header {
+    flex-direction: column;
+    gap: var(--x);
+    align-items: center;
+    justify-content: center;
+
+    &__title {
+      gap: var(--v);
+      align-items: center;
+
+      * {
+        font-size: 1.5rem;
+        font-variant: small-caps;
+      }
+
+      div {
+        background-color: var(--foreground);
+        width: var(--i);
+        height: 4rem;
+      }
+    }
+  }
+
+  &__requested {
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  nav {
+    gap: var(--x);
+  }
+
+  &__button {
+    background-color: var(--accent);
+    color: var(--foreground);
+    border: var(--border);
+    border-radius: var(--border_radius);
+    padding: var(--iii) var(--viii);
+
+    &:hover {
+      background-color: var(--foreground);
+      color: var(--accent);
+    }
+  }
+}
