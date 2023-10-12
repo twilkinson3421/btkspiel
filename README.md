@@ -1,36 +1,13 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## BTK Spiel
 
-## Getting Started
+---
 
-First, run the development server:
+### Important
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This site is not a commercial or public-intended site, instead being intended for presentation-purposes on a personal portfolio website. Visit [RAWG.io](https://rawg.io/) to use a similar product with all of the features!
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Description
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+BTK Spiel is an online game library site, that allows users to browse, search for, and read about classic, new, or upcoming games. Users can also create an account, and save games to their wishlist, or add them to their list of owned games, keeping track of their library. The data for the site is fetched from the [RAWG.io API](https://rawg.io/apidocs). The site is built using `Next.js`, `MongoDB` (via Mongoose), [`Next-Auth`](https://next-auth.js.org) (for authentication), and uses Next.js Route Handlers (API routes) for Creating, Reading, Updating, and Deleting documents in the database, as well as integrating the site with Next-Auth. I am not usinng any third-party providers within Next-Auth, so validation of credentials, password hashing, and user-accounts are all managed manually. To test the site, click the link, and start browsing or searching for games. Alternatively, create an account and start building a wishlist, and a list of games you own!
