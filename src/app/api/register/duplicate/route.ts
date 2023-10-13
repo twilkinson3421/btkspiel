@@ -5,6 +5,8 @@ import { NextResponse } from 'next/server';
 
 // ! ROUTE IS FOR CHECKING IF USER WITH SAME NAME ALREADY EXISTS IN DATABASE - NOT FOR DUPLICATING A USER
 
+export const runtime = 'edge';
+
 export async function POST(req: NextRequest) {
   try {
     await connectMongoDB();
