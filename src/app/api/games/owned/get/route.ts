@@ -3,6 +3,8 @@ import User from '@/models/user';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
+export const runtime = 'edge';
+
 export async function POST(req: NextRequest) {
   try {
     const { name } = await req.json();
