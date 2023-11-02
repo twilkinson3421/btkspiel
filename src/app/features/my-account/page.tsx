@@ -3,7 +3,7 @@ import styles from './my-account.module.scss';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { CgSpinner } from 'react-icons/cg';
 import { HiArrowRight } from 'react-icons/hi2';
 import { IoMdTrash } from 'react-icons/io';
@@ -13,19 +13,21 @@ export default function Account() {
   const [error, setError] = useState({ error: false, message: 'Test Error' });
   const [owned, setOwned] = useState([]);
   const [wishlist, setWishlist] = useState([]);
-  const [loadingData, setLoadingData] = useState(true);
+  const [showLoading, setShowLoading] = useState(true);
+  const loadingOwned = useRef(false);
+  const loadingWishlist = useRef(false);
 
   useEffect(() => {
     if (typeof session !== 'undefined' && session) {
-      getOwnedGames();
-      getWishlist();
+      !showLoading && setShowLoading(true);
+      !loadingOwned.current && getOwnedGames();
+      !loadingWishlist.current && getWishlist();
     }
-  }, [session, loadingData]);
+  }, [session]);
 
   async function getOwnedGames() {
-    setLoadingData(true);
+    loadingOwned.current = true;
     const name = session.user.name;
-
     try {
       const response = await fetch('/api/games/owned/get', {
         method: 'POST',
@@ -39,22 +41,28 @@ export default function Account() {
 
       if (!response.ok) {
         setError({ error: true, message: 'Something went wrong fetching owned games [905 Internal]' });
+        setShowLoading(false);
         return;
       }
 
       const { owned: $owned } = await response.json();
 
       setOwned($owned);
-      setLoadingData(false);
+      let hideHere = false;
+      if (!loadingWishlist.current && loadingOwned.current) {
+        hideHere = true;
+      }
+      loadingOwned.current = false;
+      hideHere && setShowLoading(false);
     } catch (error) {
       setError({ error: true, message: 'Something went wrong [906 Internal]' });
+      setShowLoading(false);
     }
   }
 
   async function getWishlist() {
-    setLoadingData(true);
+    loadingWishlist.current = true;
     const name = session.user.name;
-
     try {
       const response = await fetch('/api/games/wishlist/get', {
         method: 'POST',
@@ -68,20 +76,23 @@ export default function Account() {
 
       if (!response.ok) {
         setError({ error: true, message: 'Something went wrong fetching wishlist [923 Internal]' });
+        setShowLoading(false);
         return;
       }
 
       const { wishlist: $wishlist } = await response.json();
 
       setWishlist($wishlist);
-      setLoadingData(false);
+      loadingWishlist.current = false;
+      setShowLoading(false);
     } catch (error) {
       setError({ error: true, message: 'Something went wrong [924 Internal]' });
+      setShowLoading(false);
     }
   }
 
   async function removeGameFromOwned({ id, name, slug }: { id: number; name: string; slug: string }) {
-    setLoadingData(true);
+    loadingOwned.current = true;
     try {
       const remove$res = await fetch('/api/games/owned/remove', {
         method: 'POST',
@@ -103,11 +114,12 @@ export default function Account() {
       }
     } catch (error) {
       setError({ error: true, message: 'Something went wrong [913 Internal]' });
+      setShowLoading(false);
     }
   }
 
   async function removeGameFromWishlist({ id, name, slug }: { id: number; name: string; slug: string }) {
-    setLoadingData(true);
+    loadingWishlist.current = true;
     try {
       const remove$res = await fetch('/api/games/wishlist/remove', {
         method: 'POST',
@@ -129,6 +141,7 @@ export default function Account() {
       }
     } catch (error) {
       setError({ error: true, message: 'Something went wrong [919 Internal]' });
+      setShowLoading(false);
     }
   }
 
@@ -197,12 +210,11 @@ export default function Account() {
             <h1>{session?.user?.email}</h1>
           </hgroup>
           {error.error && <span className={styles.container__main__error}>{error.message}</span>}
-          {loadingData && <Loading />}
-          {!loadingData && (
+          {showLoading && <Loading />}
+          {!showLoading && (
             <main className={styles.container__main__data}>
               <Datalist title='Owned Games' games={owned} type='owned' />
               <Datalist title='Wishlist' games={wishlist} type='wishlist' />
-              {error.error && <span>{error.message}</span>}
             </main>
           )}
           <button onClick={() => Logout()} className={styles.container__main__button}>

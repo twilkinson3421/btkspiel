@@ -26,6 +26,7 @@
 
 .header {
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: var(--xx);
 
   &__group {
@@ -51,6 +52,7 @@
   &__lower {
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     gap: var(--xx);
   }
 
@@ -78,6 +80,8 @@
   &__lower {
     &__platforms {
       gap: var(--v);
+      flex-wrap: wrap;
+      justify-content: center;
 
       &__item {
         background-color: var(--accent);
